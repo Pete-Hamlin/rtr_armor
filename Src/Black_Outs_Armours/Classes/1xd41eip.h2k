@@ -1,0 +1,36 @@
+// This is an Unreal Script
+
+class X2Item_DefaultArmors extends X2Item;
+
+static function array<X2DataTemplate> CreateTemplates()
+{
+	local array<X2DataTemplate> Armors;
+	
+	Armors.AddItem(CreateLightKevlarArmor());
+	
+	return Armors;
+}
+
+
+static function X2DataTemplate CreateLightKevlarArmor()
+{
+	local X2ArmorTemplate Template;
+
+	`CREATE_X2TEMPLATE(class'X2ArmorTemplate', Template, 'LightKevlarArmor');
+	Template.strImage = "img:///UILibrary_StrategyImages.X2InventoryIcons.Inv_Kevlar_Armor";
+	Template.StartingItem = true;
+	Template.CanBeBuilt = false;
+	Template.ArmorTechCat = 'conventional';
+	Template.Tier = 0;
+	Template.AkAudioSoldierArmorSwitch = 'Conventional';
+	Template.EquipSound = "StrategyUI_Armor_Equip_Conventional";
+
+	Template.UpgradeItem = 'MediumPlatedArmor';
+
+	Template.SetUIStatMarkup(class'XLocalizedData'.default.HealthLabel, eStat_HP, class'X2Ability_Blackout_Armor'.default.KEVLAR_LIGHT_HP_BONUS);
+	Template.SetUIStatMarkup(class'XLocalizedData'.default.ArmorLabel, estat_ArmorMitigation, class'X2Ability_Blackout_Armor'.default.KEVLAR_LIGHT_MITIGATION_AMOUNT);
+	Template.SetUIStatMarkup(class'XLocalizedData'.default.MobilityLabel, estat_Mobility, class'X2Ability_Blackout_Armor'.default.KEVLAR_LIGHT_MOBILITY_BONUS);
+	Template.SetUIStatMarkup(class'XLocalizedData'.default.DodgeLabel, estat_Dodge, class'X2Ability_Blackout_Armor'.default.KEVLAR_LIGHT_DODGE_BONUS);
+
+	return Template;
+}
